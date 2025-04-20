@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tattoo Artists</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body x-data="{ currentSlide: 0, currentArtistSlide: 0 }">
+    <header>
+        <nav>
+            <div class="nav-left">
+                <a href="#" class="logo">DISCOVER THE COCOSMOS</a>
+            </div>
+            <div class="nav-right">
+                <ul>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#my-work-section">MY WORK</a></li>
+                    <li><a href="#schedule-section">TO FIND ME</a></li>
+                    <li><a href="#contact-section">CONTACT</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="hero-section">
+            <div class="hero-video-container">
+                <video id="hero-video" autoplay loop muted playsinline>
+                    <source src="images/landing_images/rotated_landing_video.webm" type="video/webm">
+                </video>
+            </div>
+            <div class="hero-content">
+                <div class="event-info">
+                    <div class="event-date">15-18 APRIL 2022</div>
+                </div>
+                <h1>THREE<br>DAYS OF<br>INK<br>MASTERY</h1>
+                <div class="slider-controls">
+                    <button class="slider-arrow prev-slide" @click="currentSlide = (currentSlide - 1 + 3) % 3">←</button>
+                    <button class="slider-arrow next-slide" @click="currentSlide = (currentSlide + 1) % 3">→</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cocosmos description section -->
+        <section class="cocosmos-info">
+            <div class="cocosmos-info-content">                
+                <div class="cocosmos-definition">
+                    <p>A TATTOO IS A FORM OF BODY MODIFICATION MADE BY INSERTING INK, DYES, AND/OR PIGMENTS, EITHER INDELIBLE OR TEMPORARY, INTO THE DERMIS LAYER OF THE SKIN TO FORM A DESIGN. THE ART OF MAKING TATTOOS IS TATTOOING.</p>
+                </div>
+                
+                <div class="cocosmos-categories">
+                    <p>TATTOOS FALL INTO THREE BROAD CATEGORIES: PURELY DECORATIVE, SYMBOLIC AND PICTORIAL. IN ADDITION, TATTOOS CAN BE USED FOR IDENTIFICATION SUCH AS EAR TATTOOS ON LIVESTOCK AS A FORM OF BRANDING. THIS IS PRACTICED IN DIFFERENT FORMS AROUND THE WORLD</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- My Work section -->
+        <section class="artists-section" id="my-work-section">
+            <div class="artists-heading-container">
+                <h2 class="artists-heading">MY WORK</h2>
+                <div class="artists-subheading">EXPLORE MY CREATIVE UNIVERSE</div>
+            </div>
+            
+            <div class="artists-gallery">
+                <div class="artist-card">
+                    <img src="images/art/Bodypaint%20Brigitte-07.jpg" alt="Artist 1">
+                </div>
+                <div class="artist-card">
+                    <img src="images/art/DSC00329.jpg" alt="Artist 2">
+                </div>
+                <div class="artist-card">
+                    <img src="images/art/DSC08399.jpg" alt="Artist 3">
+                </div>
+            </div>
+            
+            <div class="slider-controls artists-controls">
+                <button class="slider-arrow prev-slide" @click="currentArtistSlide = (currentArtistSlide - 1 + 3) % 3">←</button>
+                <button class="slider-arrow next-slide" @click="currentArtistSlide = (currentArtistSlide + 1) % 3">→</button>
+            </div>
+        </section>
+        
+        <!-- Schedule section -->
+        <section class="schedule-section" id="schedule-section">
+            <div class="schedule-heading-container">
+                <h2 class="schedule-heading">SCHEDULE</h2>
+                <div class="schedule-dates-container">
+                    <div class="schedule-dates">
+                        <span>15 APRIL</span>
+                        <span class="date-separator">/</span>
+                        <span>16 APRIL</span>
+                        <span class="date-separator">/</span>
+                        <span>17 APRIL</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="schedule-items">
+                <div class="schedule-item">
+                    <div class="bar-with-dots horizontal">
+                        <div class="dot"></div>
+                        <div class="bar"></div>
+                        <div class="dot"></div>
+                    </div>
+                    <div class="schedule-time">10:00 AM : HISTORY</div>
+                    <div class="schedule-description">THE SYMBOLISM AND IMPACT OF TATTOOS IN DIFFERENT PLACES AND CULTURES.</div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">12:00 PM : WORKSHOP</div>
+                    <div class="schedule-description">IN MODERN TATTOOING, AN ARTIST MAY USE A THERMAL STENCIL PAPER OR HECTOGRAPH TO FIRST PLACE THE DESIGN PRINT ON THE SKIN BEFORE WORKING WITH THE MACHINE AND NEEDLE ON SKIN.</div>
+                </div>
+            </div>
+            
+            <div class="slider-controls schedule-controls">
+                <button class="slider-arrow prev-slide">←</button>
+                <button class="slider-arrow next-slide">→</button>
+            </div>
+        </section>
+        
+        <!-- News/Showcase section -->
+        <section class="news-section" id="news-section">
+            <div class="news-header">
+                <h2 class="news-heading">NEWS</h2>
+                <a href="#" class="view-all">VIEW ALL</a>
+            </div>
+            
+            <div class="news-grid">
+                <div class="news-item">
+                    <div class="news-title">TATTOO INDUSTRY DURING THE PANDEMIC</div>
+                    <div class="news-image-container">
+                        <img src="images/Bodypaint%20Brigitte-09.jpg" alt="Tattoo Industry During The Pandemic" class="news-image">
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-title">USING INK TO SHOW PERSONALITY</div>
+                    <div class="news-image-container">
+                        <img src="images/DSC09388.JPG" alt="Using Ink To Show Personality" class="news-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact/Footer section -->
+        <section class="contact-section" id="contact-section">
+            <div class="contact-heading-container">
+                <h2 class="contact-heading">GET IN TOUCH</h2>
+            </div>
+            
+            <div class="footer-content">
+                <div class="footer-column footer-links">
+                    <div class="footer-link">ABOUT</div>
+                    <div class="footer-link">ARTISTS</div>
+                    <div class="footer-link">SCHEDULE</div>
+                    <div class="footer-link">NEWS</div>
+                </div>
+                
+                <div class="footer-column footer-contact">
+                    <h3 class="footer-subheading">BOOK A SESSION OR JUST SEND ME LOVE 💖</h3>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="email" placeholder="Your cosmic address or email" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder=" Your Message" required class="form-input form-textarea"></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">🌠 Send star into the Cocosmos 🌠</button>
+                    </form>
+                </div>
+                
+                <div class="footer-column footer-location">
+                    <div class="location-label">LOCATION</div>
+                    <div class="location-address">
+                        7170 RANDOM STREET<br>
+                        ORCHARD PARK,<br>
+                        NY 14127<br>
+                        UNITED STATES
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">&copy; 2025 MADE WITH SLIDER REVOLUTION</div>
+                <a href="#hero-section" class="go-to-top">GO ON TOP</a>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
