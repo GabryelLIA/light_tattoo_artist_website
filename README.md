@@ -1,6 +1,6 @@
 # Cocosmos Website
 
-A modern, immersive website for a creative artist portfolio, built with HTML, CSS, and Alpine.js. This project features smooth animations, interactive elements, and a cohesive dark theme design.
+A modern, immersive website for a creative artist portfolio, built with HTML, CSS, and Alpine.js. This project features smooth animations, interactive elements, a cosmic-themed navigation menu, and a cohesive dark theme design.
 
 ## Getting Started
 
@@ -62,17 +62,18 @@ npx http-server
 
 - "GET IN TOUCH" heading
 - Interactive contact form for sending messages
-- Location information
-- Footer with navigation links and copyright information
+- Image showcase in the footer
+- Footer with navigation links, image thumbnails, and copyright information
 
 ## Technical Features
 
 - **Responsive Design**: Works seamlessly on mobile, tablet, and desktop
 - **Smart Navigation**: Header disappears when scrolling down and reappears when scrolling up
+- **Interactive Cosmic Menu**: Planetary navigation system with orbiting elements
 - **Smooth Scrolling**: Enhanced navigation between sections
 - **Interactive Elements**: Form inputs, buttons, and hover effects
-- **Animations**: Grayscale transitions, parallax effects, and scroll-based animations
-- **Alpine.js Integration**: For reactive UI components
+- **Animations**: Grayscale transitions, parallax effects, orbital animations, and scroll-based animations
+- **Alpine.js Integration**: For reactive UI components and menu state management
 
 ## Project Structure
 
@@ -80,6 +81,17 @@ npx http-server
 - `styles.css` - All styling and animations
 - `script.js` - JavaScript functionality and scroll effects
 - `images/` - Directory containing all website images and video
+  - `images/planets/` - SVG files for the cosmic menu planets
+  - `images/footer-showcase/` - Images for the footer showcase
+  - `images/logo.svg` - Vector logo for the cosmic menu
+  - `images/logo.png` - PNG logo for the navigation bar
+
+## Recent Enhancements
+
+- **Cosmic Navigation Menu**: Interactive menu with orbiting planets representing different sections
+- **Footer Redesign**: Added image thumbnails with centered text overlays
+- **Visual Improvements**: Enhanced image presentations with hover effects
+- **Interactive Elements**: Added close button for the menu and improved navigation
 
 ## Future Enhancements
 
@@ -88,6 +100,7 @@ npx http-server
 - Enhanced gallery with lightbox functionality
 - Additional animation effects
 - SEO optimization
+- More cosmic-themed interactive elements
 
 ---
 
