@@ -17,6 +17,12 @@ body {
     overflow-x: hidden;
 }
 
+.centered-heading {
+    text-align: center;
+    width: 100%;
+    margin: 0 0 1em 0;
+}
+
 a {
     color: #fff;
     text-decoration: none;
@@ -63,6 +69,7 @@ nav {
 .nav-logo {
     height: 24px;
     width: auto;
+    margin-left: 8px;
     margin-right: 8px;
     vertical-align: middle;
 }
@@ -277,6 +284,21 @@ nav {
 }
 
 /* Hero Section */
+
+.hero-title {
+  transition: filter 0.5s, opacity 0.5s;
+}
+.blur-in {
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.5s, filter 0.5s;
+}
+.blur-out {
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.5s, filter 0.5s;
+}
+
 .hero {
     height: 100vh;
     display: flex;

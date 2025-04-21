@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/svg" href="images/logo_cocosmos.svg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tattoo Artists</title>
@@ -11,7 +12,7 @@
     <header>
         <nav>
             <div class="nav-left" @click="menuOpen = !menuOpen" id="menu-toggle">
-                <a href="javascript:void(0)" class="logo"><img src="images/logo.png" alt="Cocosmos Logo" class="nav-logo">DISCOVER THE COCOSMOS</a>
+                <a href="javascript:void(0)" class="logo">DISCOVER THE COCOSMOS <img src="images/logo_cocosmos.svg" alt="Cocosmos Logo" class="nav-logo"></a>
             </div>
             <div class="nav-right">
                 <ul>
@@ -29,7 +30,7 @@
     <div class="menu-overlay">
         <div class="menu-close" id="menu-close">✕</div>
         <div class="menu-content">
-            <img src="images/logo.svg" alt="Cocosmos Logo" class="menu-logo">
+            <img src="images/logo_cocosmos.svg" alt="Cocosmos Logo" class="menu-logo">
             <div class="planets-container">
                 <div class="planet planet-1" data-name="Live painting">
                     <img src="images/planets/planet-01.svg" alt="Live painting">
@@ -63,9 +64,35 @@
             </div>
             <div class="hero-content">
                 <div class="event-info">
-                    <div class="event-date">15-18 APRIL 2022</div>
+                    <div class="event-date">Painting the soul through the body</div>
                 </div>
-                <h1>THREE<br>DAYS OF<br>INK<br>MASTERY</h1>
+                <h1
+    x-data="{
+        states: [
+            'LIVE A<br>LIBERATING<br>EXPERIENCE',
+            'FEEL A<br>LIBERATING<br>EXPERIENCE',
+            'FEEL A<br>TRANSFORMING<br>EXPERIENCE',
+            'FEEL A<br>TRANSFORMING<br>ADVENTURE',
+            'THRIVE INTO<br>A TRANSFORMING<br>ADVENTURE',
+            'THRIVE INTO<br>YOUR NEW<br>ADVENTURE',
+            'THRIVE INTO<br>YOUR NEW<br>SELF',
+            'PROGRAM INTO<br>YOUR NEW<br>SELF',
+            'PROGRAM AN<br>UNFORGETABLE<br>NEW SELF',
+            'PROGRAM AN<br>UNFORGETABLE<br>EVENT',
+            'LIVE AN<br>UNFORGETABLE<br>EVENT',
+            'LIVE A<br>LIBERATING<br>EVENT',
+            'LIVE A<br>LIBERATING<br>EXPERIENCE'
+        ],
+        idx: 0,
+        get current() { return this.states[this.idx]; }
+    }"
+    x-init="setInterval(() => { idx = (idx + 1) % states.length }, 4000)"
+    x-html="current"
+    x-transition:enter="blur-in"
+    x-transition:leave="blur-out"
+    class="hero-title"
+    style="text-transform: uppercase;"
+></h1>
                 <div class="slider-controls">
                     <button class="slider-arrow prev-slide" @click="currentSlide = (currentSlide - 1 + 3) % 3">←</button>
                     <button class="slider-arrow next-slide" @click="currentSlide = (currentSlide + 1) % 3">→</button>
@@ -75,7 +102,9 @@
 
         <!-- Cocosmos description section -->
         <section class="cocosmos-info" id="about-section">
+
             <div class="cocosmos-info-content">                
+                <h3 class="centered-heading">ABOUT BODYPAINTING</h3>
                 <div class="cocosmos-definition">
                     <p>A TATTOO IS A FORM OF BODY MODIFICATION MADE BY INSERTING INK, DYES, AND/OR PIGMENTS, EITHER INDELIBLE OR TEMPORARY, INTO THE DERMIS LAYER OF THE SKIN TO FORM A DESIGN. THE ART OF MAKING TATTOOS IS TATTOOING.</p>
                 </div>
