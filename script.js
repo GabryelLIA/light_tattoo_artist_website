@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const heroSection = document.getElementById('hero-section');
     const myWorkSection = document.getElementById('my-work-section');
     const header = document.querySelector('header');
+    const navLeft = document.querySelector('.nav-left');
+    const heroContent = document.querySelector('.hero-content');
+    const heroVideo = document.getElementById('hero-video');
     
     let lastScrollTop = 0;
     
@@ -86,6 +89,70 @@ document.addEventListener('DOMContentLoaded', function() {
             myWorkSection.classList.add('show-gallery');
         }
     }, 500);
+    
+    // Menu functionality - direct approach
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    const menuLogo = document.querySelector('.menu-logo');
+    const menuClose = document.getElementById('menu-close');
+    
+    // Function to close the menu
+    const closeMenu = () => {
+        if (menuOverlay && menuOverlay.classList.contains('active')) {
+            menuOverlay.classList.remove('active');
+            // Show hero content
+            if (heroContent) {
+                heroContent.style.opacity = '1';
+                heroContent.style.pointerEvents = 'auto';
+            }
+            // Reset video filter
+            if (heroVideo) {
+                heroSection.classList.remove('grayscale-50');
+            }
+        }
+    };
+    
+    // Open menu when clicking on nav-left
+    if (menuToggle && menuOverlay) {
+        menuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Toggle menu visibility
+            const isMenuVisible = menuOverlay.classList.contains('active');
+            
+            if (isMenuVisible) {
+                closeMenu();
+            } else {
+                menuOverlay.classList.add('active');
+                // Hide hero content
+                if (heroContent) {
+                    heroContent.style.opacity = '0';
+                    heroContent.style.pointerEvents = 'none';
+                }
+                // Apply grayscale to video
+                if (heroVideo) {
+                    heroSection.classList.add('grayscale-50');
+                }
+            }
+        });
+    }
+    
+    // Close menu when clicking on the logo in the menu
+    if (menuLogo) {
+        menuLogo.addEventListener('click', closeMenu);
+    }
+    
+    // Close menu when clicking on the close button
+    if (menuClose) {
+        menuClose.addEventListener('click', closeMenu);
+    }
+    
+    // Close menu when scrolling down
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) { // Close menu after scrolling 50px
+            closeMenu();
+        }
+    });
     
     // Preload images for better performance
     const preloadImages = () => {

@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="styles.css">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body x-data="{ currentSlide: 0, currentArtistSlide: 0 }">
+<body x-data="{ currentSlide: 0, currentArtistSlide: 0, menuOpen: false }">
     <header>
         <nav>
-            <div class="nav-left">
-                <a href="#" class="logo">DISCOVER THE COCOSMOS</a>
+            <div class="nav-left" @click="menuOpen = !menuOpen" id="menu-toggle">
+                <a href="javascript:void(0)" class="logo"><img src="images/logo.png" alt="Cocosmos Logo" class="nav-logo">DISCOVER THE COCOSMOS</a>
             </div>
             <div class="nav-right">
                 <ul>
-                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#about-section">ABOUT</a></li>
                     <li><a href="#my-work-section">MY WORK</a></li>
                     <li><a href="#schedule-section">TO FIND ME</a></li>
                     <li><a href="#contact-section">CONTACT</a></li>
@@ -25,7 +25,37 @@
     </header>
 
     <main>
-        <section class="hero" id="hero-section">
+        <!-- Menu Overlay -->
+    <div class="menu-overlay">
+        <div class="menu-close" id="menu-close">✕</div>
+        <div class="menu-content">
+            <img src="images/logo.svg" alt="Cocosmos Logo" class="menu-logo">
+            <div class="planets-container">
+                <div class="planet planet-1" data-name="Live painting">
+                    <img src="images/planets/planet-01.svg" alt="Live painting">
+                    <span class="planet-name">Live painting</span>
+                </div>
+                <div class="planet planet-2" data-name="Workshops : learn bodypainting">
+                    <img src="images/planets/planet-02.svg" alt="Workshops">
+                    <span class="planet-name">Workshops : learn bodypainting</span>
+                </div>
+                <div class="planet planet-3" data-name="private Cocoon">
+                    <img src="images/planets/planet-03.svg" alt="private Cocoon">
+                    <span class="planet-name">private Cocoon</span>
+                </div>
+                <div class="planet planet-4" data-name="My art">
+                    <img src="images/planets/planet-04.svg" alt="My art">
+                    <span class="planet-name">My art</span>
+                </div>
+                <div class="planet planet-5" data-name="All of my art">
+                    <img src="images/planets/planet-05.svg" alt="All of my art">
+                    <span class="planet-name">All of my art</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <section class="hero" id="hero-section">
             <div class="hero-video-container">
                 <video id="hero-video" autoplay loop muted playsinline>
                     <source src="images/landing_images/rotated_landing_video.webm" type="video/webm">
@@ -44,7 +74,7 @@
         </section>
 
         <!-- Cocosmos description section -->
-        <section class="cocosmos-info">
+        <section class="cocosmos-info" id="about-section">
             <div class="cocosmos-info-content">                
                 <div class="cocosmos-definition">
                     <p>A TATTOO IS A FORM OF BODY MODIFICATION MADE BY INSERTING INK, DYES, AND/OR PIGMENTS, EITHER INDELIBLE OR TEMPORARY, INTO THE DERMIS LAYER OF THE SKIN TO FORM A DESIGN. THE ART OF MAKING TATTOOS IS TATTOOING.</p>
@@ -150,11 +180,31 @@
             </div>
             
             <div class="footer-content">
-                <div class="footer-column footer-links">
-                    <div class="footer-link">ABOUT</div>
-                    <div class="footer-link">ARTISTS</div>
-                    <div class="footer-link">SCHEDULE</div>
-                    <div class="footer-link">NEWS</div>
+                <div class="footer-column footer-left">
+                    <a href="#about-section" class="footer-item">
+                        <div class="footer-image-container">
+                            <img src="images/DSC09388.JPG" alt="About" class="footer-image">
+                            <div class="footer-link">ABOUT</div>
+                        </div>
+                    </a>
+                    <a href="#my-work-section" class="footer-item">
+                        <div class="footer-image-container">
+                            <img src="images/DSC09388.JPG" alt="My Work" class="footer-image">
+                            <div class="footer-link">MY WORK</div>
+                        </div>
+                    </a>
+                    <a href="#schedule-section" class="footer-item">
+                        <div class="footer-image-container">
+                            <img src="images/DSC09388.JPG" alt="To Find Me" class="footer-image">
+                            <div class="footer-link">TO FIND ME</div>
+                        </div>
+                    </a>
+                    <a href="#contact-section" class="footer-item">
+                        <div class="footer-image-container">
+                            <img src="images/DSC09388.JPG" alt="Contact" class="footer-image">
+                            <div class="footer-link">CONTACT</div>
+                        </div>
+                    </a>
                 </div>
                 
                 <div class="footer-column footer-contact">
@@ -170,23 +220,19 @@
                     </form>
                 </div>
                 
-                <div class="footer-column footer-location">
-                    <div class="location-label">LOCATION</div>
-                    <div class="location-address">
-                        7170 RANDOM STREET<br>
-                        ORCHARD PARK,<br>
-                        NY 14127<br>
-                        UNITED STATES
+                <div class="footer-column footer-showcase">
+                    <div class="showcase-image-container">
+                        <img src="images/footer-showcase/DSC08433.jpg" alt="Showcase Image" class="showcase-image">
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <div class="copyright">&copy; 2025 MADE WITH SLIDER REVOLUTION</div>
+                <div class="copyright">&copy; 2025 MADE WITH LOVE BY A HAAI</div>
                 <a href="#hero-section" class="go-to-top">GO ON TOP</a>
             </div>
         </section>
-    </main>
+	    </main>
 
     <script src="script.js"></script>
 </body>
