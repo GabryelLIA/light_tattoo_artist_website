@@ -5,14 +5,54 @@
     box-sizing: border-box;
 }
 
+/*
+  CSS Variable System
+  ------------------
+  All global design tokens are defined in :root as CSS custom properties for maintainability and easy theming.
+  Categories:
+    --color-*      : Color palette (background, foreground, accents, links, errors, shadows)
+    --font-*       : Font families and font sizes
+    --space-*      : Spacing scale (xs-xl for margin, padding, gap)
+    --transition-* : Animation/transition durations
+    --border-*     : Border radius, widths
+    --box-shadow-* : Shadow presets
+  Use these variables throughout the stylesheet for consistency and fast theme changes.
+*/
+
+:root {
+    --color-bg: #000;
+    --color-fg: #fff;
+    --color-accent: rgb(255 255 255 / 10%);
+    --color-accent-2: rgb(255 255 255 / 30%);
+    --color-accent-3: rgb(255 255 255 / 50%);
+    --color-shadow: rgb(0 0 0 / 70%);
+    --color-link: #a7e9ff;
+    --color-error: #ff4b4b;
+    --font-main: 'Helvetica Neue', arial, sans-serif;
+    --transition-main: 0.3s ease;
+    --border-radius: 4px;
+    --font-size-base: 0.9rem;
+    --font-size-heading: 5rem;
+    --font-size-subheading: 1.5rem;
+    --font-size-footer-link: 1.6rem;
+    --font-size-small: 0.8rem;
+    --font-size-large: 2.5rem;
+    --space-xs: 5px;
+    --space-sm: 10px;
+    --space-md: 20px;
+    --space-lg: 40px;
+    --space-xl: 80px;
+    --box-shadow-main: 0 0 5px var(--color-shadow);
+}
+
 html {
     scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #000;
-    color: #fff;
+    font-family: var(--font-main);
+    background-color: var(--color-bg);
+    color: var(--color-fg);
     line-height: 1.2;
     overflow-x: hidden;
 }
@@ -20,11 +60,11 @@ body {
 .centered-heading {
     text-align: center;
     width: 100%;
-    margin: 0 0 1em 0;
+    margin: var(--margin-md);
 }
 
 a {
-    color: #fff;
+    color: var(--color-link);
     text-decoration: none;
 }
 
@@ -39,7 +79,7 @@ header {
     left: 0;
     width: 100%;
     z-index: 100;
-    padding: 20px 40px;
+    padding: var(--space-md);
     transition: transform 0.3s ease;
 }
 
@@ -58,7 +98,7 @@ nav {
 }
 
 .nav-left .logo {
-    font-size: 0.7rem;
+    font-size: var(--font-size-small);
     font-weight: 300;
     letter-spacing: 1px;
     opacity: 0.8;
@@ -69,8 +109,8 @@ nav {
 .nav-logo {
     height: 24px;
     width: auto;
-    margin-left: 8px;
-    margin-right: 8px;
+    margin-left: var(--space-sm);
+    margin-right: var(--space-sm);
     vertical-align: middle;
 }
 
@@ -79,8 +119,8 @@ nav {
 }
 
 .nav-right ul li {
-    margin-left: 30px;
-    font-size: 0.7rem;
+    margin-left: var(--space-md);
+    font-size: var(--font-size-small);
     letter-spacing: 1px;
     font-weight: 300;
 }
@@ -114,8 +154,8 @@ nav {
 
 .menu-close {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: var(--space-md);
+    left: var(--space-md);
     font-size: 24px;
     color: white;
     cursor: pointer;
@@ -126,12 +166,12 @@ nav {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
+    background-color: rgb(255 255 255 / 10%);
+    transition: all var(--transition-main);
 }
 
 .menu-close:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgb(255 255 255 / 20%);
     transform: rotate(90deg);
 }
 
@@ -173,27 +213,38 @@ nav {
     transition: transform 0.3s ease;
 }
 
+.artist-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    display: block;
+    animation: remove-grayscale 5s forwards;
+}
+
 .planet img {
     width: 60px;
     height: 60px;
     transition: transform 0.3s ease, filter 0.3s ease;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    filter: drop-shadow(0 0 10px rgb(255 255 255 / 30%));
 }
 
 .planet:hover img {
     transform: scale(1.2);
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
+    filter: drop-shadow(0 0 15px rgb(255 255 255 / 60%));
 }
 
 .planet-name {
-    margin-top: 10px;
+    margin-top: var(--space-sm);
     color: white;
-    font-size: 0.8rem;
+    font-size: var(--font-size-small);
     text-align: center;
     opacity: 1;
     transition: transform 0.3s ease;
     max-width: 120px;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 5px rgb(255 255 255 / 50%);
     transform: translateY(0);
 }
 
@@ -259,40 +310,21 @@ nav {
 }
 
 /* Menu transitions */
-.menu-enter {
-    transition: opacity 0.5s ease;
-}
 
-.menu-enter-start {
-    opacity: 0;
-}
-
-.menu-enter-end {
-    opacity: 1;
-}
-
-.menu-leave {
-    transition: opacity 0.5s ease;
-}
-
-.menu-leave-start {
-    opacity: 1;
-}
-
-.menu-leave-end {
-    opacity: 0;
-}
+/* Removed unused menu-enter/menu-leave transitions (not referenced in the HTML or JS) */
 
 /* Hero Section */
 
 .hero-title {
   transition: filter 0.5s, opacity 0.5s;
 }
+
 .blur-in {
   opacity: 0;
   filter: blur(8px);
   transition: opacity 0.5s, filter 0.5s;
 }
+
 .blur-out {
   opacity: 0;
   filter: blur(8px);
@@ -303,7 +335,7 @@ nav {
     height: 100vh;
     display: flex;
     align-items: flex-end;
-    padding: 0 40px 80px;
+    padding: var(--padding-lg);
     position: relative;
     overflow: hidden;
     transition: filter 0.5s ease;
@@ -327,14 +359,15 @@ nav {
     height: 100%;
     object-fit: cover;
     filter: grayscale(100%);
-    animation: removeGrayscale 5s forwards;
+    animation: remove-grayscale 5s forwards;
     transition: filter 0.5s ease;
 }
 
-@keyframes removeGrayscale {
+@keyframes remove-grayscale {
     0% {
         filter: grayscale(100%);
     }
+
     100% {
         filter: grayscale(0%);
     }
@@ -347,7 +380,7 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgb(0 0 0 / 40%);
     z-index: 1;
 }
 
@@ -363,21 +396,21 @@ nav {
 .event-info {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-md);
 }
 
 .event-date {
-    font-size: 0.7rem;
+    font-size: var(--font-size-small);
     letter-spacing: 1px;
     font-weight: 300;
     opacity: 0.9;
 }
 
 h1 {
-    font-size: 5rem;
+    font-size: var(--font-size-heading);
     font-weight: 700;
     line-height: 0.9;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-md);
     text-transform: uppercase;
     letter-spacing: -1px;
 }
@@ -385,17 +418,17 @@ h1 {
 .slider-controls {
     display: flex;
     position: absolute;
-    bottom: 40px;
-    right: 40px;
+    bottom: var(--space-md);
+    right: var(--space-md);
 }
 
 .slider-arrow {
     background: none;
     border: none;
-    color: #fff;
+    color: var(--color-link);
     font-size: 1.2rem;
     cursor: pointer;
-    padding: 5px 10px;
+    padding: var(--space-sm) var(--space-md);
     opacity: 0.7;
     transition: opacity 0.3s ease;
 }
@@ -406,9 +439,9 @@ h1 {
 
 /* Cocosmos Information Section */
 .cocosmos-info {
-    background-color: #000;
-    color: #fff;
-    padding: 80px 40px;
+    background-color: var(--color-bg);
+    color: var(--color-link);
+    padding: var(--padding-lg);
     position: relative;
 }
 
@@ -418,14 +451,14 @@ h1 {
 }
 
 .cocosmos-definition {
-    margin-bottom: 40px;
+    margin-bottom: var(--space-lg);
     max-width: 70%;
     margin-left: auto;
     text-align: right;
 }
 
 .cocosmos-definition p {
-    font-size: 0.9rem;
+    font-size: var(--font-size-base);
     line-height: 1.5;
     letter-spacing: 0.5px;
     font-weight: 300;
@@ -438,7 +471,7 @@ h1 {
 }
 
 .cocosmos-categories p {
-    font-size: 0.9rem;
+    font-size: var(--font-size-base);
     line-height: 1.5;
     letter-spacing: 0.5px;
     font-weight: 300;
@@ -449,8 +482,8 @@ h1 {
 .artists-section {
     position: relative;
     min-height: 100vh;
-    background-color: #000;
-    color: #fff;
+    background-color: var(--color-bg);
+    color: var(--color-link);
     padding: 0;
     overflow: hidden;
     display: flex;
@@ -460,31 +493,31 @@ h1 {
 .artists-heading-container {
     position: relative;
     width: 100%;
-    padding: 60px 40px 40px;
+    padding: var(--padding-md);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .artists-heading {
-    font-size: 8rem;
+    font-size: var(--font-size-large);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: -2px;
-    margin-bottom: 10px;
+    margin-bottom: var(--space-md);
     line-height: 0.9;
-    color: white;
+    color: var(--color-link);
     text-align: center;
 }
 
 .artists-subheading {
-    font-size: 0.8rem;
+    font-size: var(--font-size-small);
     letter-spacing: 1px;
     font-weight: 300;
     opacity: 0.8;
-    margin-top: 5px;
+    margin-top: var(--space-sm);
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: var(--space-lg);
 }
 
 .artists-gallery {
@@ -496,40 +529,21 @@ h1 {
     align-items: center;
     gap: 0; /* Remove gap between images */
     padding: 0;
-    background-color: #000;
+    background-color: var(--color-bg);
 }
-
-/* This class will be added via JavaScript when scrolled to the right position */
-.artists-section.show-gallery .artists-gallery {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Remove the show-gallery classes since we're showing everything by default */
 
 .artist-card {
     width: 33.33%;
     height: 100%;
     overflow: hidden;
     position: relative;
-    background-color: #000;
-}
-
-.artist-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    filter: grayscale(100%);
-    opacity: 0.7;
-    display: block;
-    animation: removeGrayscale 5s forwards;
+    background-color: var(--color-bg);
 }
 
 .artists-controls {
     position: absolute;
-    bottom: 40px;
-    right: 40px;
+    bottom: var(--space-md);
+    right: var(--space-md);
     z-index: 20;
 }
 
@@ -537,9 +551,9 @@ h1 {
 .schedule-section {
     position: relative;
     min-height: 100vh;
-    background-color: #000;
-    color: #fff;
-    padding: 60px 40px;
+    background-color: var(--color-bg);
+    color: var(--color-link);
+    padding: var(--padding-md);
     display: flex;
     flex-direction: column;
 }
@@ -548,7 +562,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    margin-bottom: 80px;
+    margin-bottom: var(--space-lg);
     text-align: right;
 }
 
@@ -556,7 +570,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 10px;
+    gap: var(--space-sm);
 }
 
 .bar-with-dots {
@@ -566,64 +580,64 @@ h1 {
 }
 
 .bar-with-dots.horizontal {
-    margin-bottom: 15px;
+    margin-bottom: var(--space-md);
 }
 
 .dot {
     width: 6px;
     height: 6px;
-    background-color: white;
+    background-color: var(--color-link);
     border-radius: 50%;
 }
 
 .bar {
     flex-grow: 1;
     height: 1px;
-    background-color: white;
-    margin: 0 5px;
+    background-color: var(--color-link);
+    margin: 0 var(--space-sm);
 }
 
 .schedule-heading {
-    font-size: 8rem;
+    font-size: var(--font-size-large);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: -2px;
     line-height: 0.9;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-md);
 }
 
 .schedule-dates {
-    font-size: 0.9rem;
+    font-size: var(--font-size-base);
     letter-spacing: 1px;
     font-weight: 300;
 }
 
 .date-separator {
-    margin: 0 10px;
+    margin: 0 var(--space-sm);
     opacity: 0.5;
 }
 
 .schedule-items {
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    gap: var(--space-lg);
     max-width: 80%;
 }
 
 .schedule-item {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--space-sm);
 }
 
 .schedule-time {
-    font-size: 1.8rem;
+    font-size: var(--font-size-large);
     font-weight: 600;
     letter-spacing: 1px;
 }
 
 .schedule-description {
-    font-size: 0.9rem;
+    font-size: var(--font-size-base);
     line-height: 1.6;
     opacity: 0.8;
     max-width: 80%;
@@ -631,37 +645,37 @@ h1 {
 
 .schedule-controls {
     position: absolute;
-    bottom: 40px;
-    right: 40px;
+    bottom: var(--space-md);
+    right: var(--space-md);
 }
 
 /* News/Showcase Section */
 .news-section {
     position: relative;
-    background-color: #000;
-    color: #fff;
-    padding: 60px 40px;
+    background-color: var(--color-bg);
+    color: var(--color-link);
+    padding: var(--padding-md);
 }
 
 .news-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: var(--space-lg);
 }
 
 .news-heading {
-    font-size: 5rem;
+    font-size: var(--font-size-heading);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: -1px;
 }
 
 .view-all {
-    font-size: 0.8rem;
+    font-size: var(--font-size-small);
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--color-link);
     text-decoration: none;
     opacity: 0.8;
     transition: opacity 0.3s ease;
@@ -674,13 +688,13 @@ h1 {
 .news-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    gap: var(--space-md);
 }
 
 .news-item {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: var(--space-sm);
 }
 
 .news-image-container {
@@ -699,7 +713,7 @@ h1 {
     height: 100%;
     object-fit: cover;
     filter: grayscale(100%);
-    transition: filter 0.3s ease;
+    transition: filter var(--transition-main);
 }
 
 .news-item:hover .news-image {
@@ -707,7 +721,7 @@ h1 {
 }
 
 .news-title {
-    font-size: 0.9rem;
+    font-size: var(--font-size-base);
     letter-spacing: 1px;
     line-height: 1.4;
 }
@@ -715,18 +729,18 @@ h1 {
 /* Contact/Footer Section */
 .contact-section {
     position: relative;
-    background-color: #000;
-    color: #fff;
-    padding: 80px 40px 30px;
+    background-color: var(--color-bg);
+    color: var(--color-link);
+    padding: var(--padding-lg);
 }
 
 .contact-heading-container {
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: var(--space-lg);
 }
 
 .contact-heading {
-    font-size: 5rem;
+    font-size: var(--font-size-heading);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: -1px;
@@ -735,8 +749,8 @@ h1 {
 .footer-content {
     display: grid;
     grid-template-columns: 0.8fr 1.4fr 0.8fr;
-    gap: 40px;
-    margin-bottom: 50px;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-md);
 }
 
 .footer-column {
@@ -745,22 +759,22 @@ h1 {
 }
 
 .footer-left {
-    gap: 15px;
+    gap: var(--space-sm);
 }
 
 .footer-item {
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    margin-bottom: var(--space-sm);
     text-decoration: none;
-    color: #fff;
+    color: var(--color-link);
 }
 
 .footer-image-container {
     width: 100%;
     height: 90px;
     overflow: hidden;
-    border-radius: 3px;
+    border-radius: var(--border-radius);
     position: relative;
 }
 
@@ -786,34 +800,34 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.6rem;
+    font-size: var(--font-size-footer-link);
     letter-spacing: 1px;
     text-align: center;
-    color: #fff;
+    color: var(--color-link);
     font-weight: 600;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    text-shadow: 0 0 5px rgb(0 0 0 / 70%);
+    box-shadow: var(--box-shadow-main);
 }
-
 
 .footer-contact {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: var(--space-sm);
     align-items: flex-start;
     width: 100%;
 }
 
 .footer-subheading {
-    font-size: 1.5rem;
+    font-size: var(--font-size-subheading);
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-md);
 }
 
 .contact-form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: var(--space-sm);
     align-items: stretch;
 }
 
@@ -823,18 +837,18 @@ h1 {
 
 .form-input {
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgb(255 255 255 / 10%);
     border: none;
-    padding: 12px 15px;
-    color: #fff;
-    font-size: 0.9rem;
+    padding: var(--space-sm) var(--space-md);
+    color: var(--color-link);
+    font-size: var(--font-size-base);
     font-family: inherit;
-    transition: background-color 0.3s ease;
+    transition: background-color var(--transition-main);
 }
 
 .form-input:focus {
     outline: none;
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgb(255 255 255 / 15%);
 }
 
 .form-textarea {
@@ -844,21 +858,21 @@ h1 {
 
 .submit-button {
     background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #fff;
-    padding: 12px 20px;
-    font-size: 0.9rem;
+    border: 1px solid rgb(255 255 255 / 30%);
+    color: var(--color-link);
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-base);
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--transition-main);
     align-self: flex-end;
-    margin-top: 10px;
+    margin-top: var(--space-sm);
 }
 
 .submit-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgb(255 255 255 / 10%);
+    border-color: rgb(255 255 255 / 50%);
 }
 
 .footer-showcase {
@@ -866,16 +880,16 @@ h1 {
 }
 
 .showcase-label {
-    font-size: 0.8rem;
+    font-size: var(--font-size-small);
     opacity: 0.5;
-    margin-bottom: 15px;
+    margin-bottom: var(--space-sm);
     text-align: right;
 }
 
 .showcase-image-container {
     width: 100%;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
 }
 
 .showcase-image {
@@ -895,18 +909,18 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--space-md);
+    border-top: 1px solid rgb(255 255 255 / 10%);
 }
 
 .copyright {
-    font-size: 0.8rem;
+    font-size: var(--font-size-small);
     opacity: 0.5;
 }
 
 .go-to-top {
-    font-size: 0.8rem;
-    color: #fff;
+    font-size: var(--font-size-small);
+    color: var(--color-link);
     text-decoration: none;
     opacity: 0.7;
     transition: opacity 0.3s ease;
@@ -917,26 +931,13 @@ h1 {
 }
 
 /* Media Queries */
-@media (max-width: 768px) {
+@media (width <= 768px) {
     h1 {
         font-size: 3.5rem;
     }
     
-    h2 {
-        font-size: 3rem;
-        margin-bottom: 40px;
-    }
-    
     .hero {
         padding: 0 20px 60px;
-    }
-    
-    header {
-        padding: 15px 20px;
-    }
-    
-    .nav-right ul li {
-        margin-left: 15px;
     }
     
     .cocosmos-definition,
@@ -962,23 +963,9 @@ h1 {
     }
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
     h1 {
-        font-size: 2.5rem;
-    }
-    
-    h2 {
-        font-size: 2.2rem;
-    }
-    
-    .nav-right ul li {
-        margin-left: 10px;
-        font-size: 0.6rem;
-    }
-    
-    .cocosmos-definition p,
-    .cocosmos-categories p {
-        font-size: 0.8rem;
+        font-size: var(--font-size-large);
     }
     
     .artists-heading {
@@ -1035,10 +1022,6 @@ h1 {
     .footer-content {
         grid-template-columns: 1fr;
         gap: 40px;
-    }
-    
-    .footer-location {
-        text-align: left;
     }
     
     .footer-bottom {

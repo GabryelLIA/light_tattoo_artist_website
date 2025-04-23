@@ -11,75 +11,73 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let lastScrollTop = 0;
     
-    // Function to handle scroll effects
+    // Cache DOM nodes outside scroll handler for efficiency
+    const headingElement = myWorkSection ? myWorkSection.querySelector('.artists-heading') : null;
+    const subheadingElement = myWorkSection ? myWorkSection.querySelector('.artists-subheading') : null;
+
+    // Throttle scroll event using requestAnimationFrame
+    let ticking = false;
     const handleScroll = () => {
         const scrollPosition = window.scrollY;
         const windowHeight = window.innerHeight;
-        
-        // Handle header visibility on scroll
-        if (scrollPosition > 100) { // Only apply after scrolling a bit
+
+        // Header visibility
+        if (scrollPosition > 100) {
             if (scrollPosition > lastScrollTop) {
-                // Scrolling down - hide header
                 header.classList.add('header-hidden');
             } else {
-                // Scrolling up - show header
                 header.classList.remove('header-hidden');
             }
         } else {
-            // At the top - always show header
             header.classList.remove('header-hidden');
         }
-        
-        // Update last scroll position
         lastScrollTop = scrollPosition;
-        
+
         // Parallax effect for hero section
         if (heroSection) {
             heroSection.style.backgroundPositionY = `calc(50% + ${scrollPosition * 0.1}px)`;
         }
-        
+
         // My Work section animation
         if (myWorkSection) {
             const sectionTop = myWorkSection.offsetTop;
             const sectionHeight = myWorkSection.offsetHeight;
             const scrollTriggerPoint = sectionTop + windowHeight / 2;
-            
-            // Check if we've scrolled past the trigger point
+
             if (scrollPosition > scrollTriggerPoint) {
                 myWorkSection.classList.add('show-gallery');
             } else {
                 myWorkSection.classList.remove('show-gallery');
             }
-            
+
             // Parallax effect for the heading based on scroll position
             const scrollProgress = (scrollPosition - sectionTop) / sectionHeight;
-            if (scrollProgress >= 0 && scrollProgress <= 1) {
-                const headingElement = myWorkSection.querySelector('.artists-heading');
-                const subheadingElement = myWorkSection.querySelector('.artists-subheading');
-                
-                if (headingElement && subheadingElement) {
-                    // Apply parallax effect to heading
-                    const translateY = Math.min(scrollProgress * 100, 50);
-                    const opacity = Math.max(1 - scrollProgress * 1.5, 0.2);
-                    headingElement.style.transform = `translateY(-${translateY}px)`;
-                    headingElement.style.opacity = opacity;
-                    
-                    // Show subheading as we scroll
-                    if (scrollProgress > 0.2) {
-                        subheadingElement.style.transform = 'translateY(0)';
-                        subheadingElement.style.opacity = Math.min(scrollProgress * 2, 1);
-                    } else {
-                        subheadingElement.style.transform = 'translateY(20px)';
-                        subheadingElement.style.opacity = 0;
-                    }
+            if (scrollProgress >= 0 && scrollProgress <= 1 && headingElement && subheadingElement) {
+                const translateY = Math.min(scrollProgress * 100, 50);
+                const opacity = Math.max(1 - scrollProgress * 1.5, 0.2);
+                headingElement.style.transform = `translateY(-${translateY}px)`;
+                headingElement.style.opacity = opacity;
+
+                if (scrollProgress > 0.2) {
+                    subheadingElement.style.transform = 'translateY(0)';
+                    subheadingElement.style.opacity = Math.min(scrollProgress * 2, 1);
+                } else {
+                    subheadingElement.style.transform = 'translateY(20px)';
+                    subheadingElement.style.opacity = 0;
                 }
             }
         }
+        ticking = false;
     };
-    
-    // Add scroll event listener
-    window.addEventListener('scroll', handleScroll);
-    
+
+    const onScroll = () => {
+        if (!ticking) {
+            window.requestAnimationFrame(handleScroll);
+            ticking = true;
+        }
+    };
+    window.addEventListener('scroll', onScroll);
+
     // Run once on load to set initial states
     handleScroll();
     
@@ -90,69 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 500);
     
-    // Menu functionality - direct approach
-    const menuToggle = document.getElementById('menu-toggle');
-    const menuOverlay = document.querySelector('.menu-overlay');
-    const menuLogo = document.querySelector('.menu-logo');
-    const menuClose = document.getElementById('menu-close');
-    
-    // Function to close the menu
-    const closeMenu = () => {
-        if (menuOverlay && menuOverlay.classList.contains('active')) {
-            menuOverlay.classList.remove('active');
-            // Show hero content
-            if (heroContent) {
-                heroContent.style.opacity = '1';
-                heroContent.style.pointerEvents = 'auto';
-            }
-            // Reset video filter
-            if (heroVideo) {
-                heroSection.classList.remove('grayscale-50');
-            }
-        }
-    };
-    
-    // Open menu when clicking on nav-left
-    if (menuToggle && menuOverlay) {
-        menuToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Toggle menu visibility
-            const isMenuVisible = menuOverlay.classList.contains('active');
-            
-            if (isMenuVisible) {
-                closeMenu();
-            } else {
-                menuOverlay.classList.add('active');
-                // Hide hero content
-                if (heroContent) {
-                    heroContent.style.opacity = '0';
-                    heroContent.style.pointerEvents = 'none';
-                }
-                // Apply grayscale to video
-                if (heroVideo) {
-                    heroSection.classList.add('grayscale-50');
-                }
-            }
-        });
-    }
-    
-    // Close menu when clicking on the logo in the menu
-    if (menuLogo) {
-        menuLogo.addEventListener('click', closeMenu);
-    }
-    
-    // Close menu when clicking on the close button
-    if (menuClose) {
-        menuClose.addEventListener('click', closeMenu);
-    }
-    
-    // Close menu when scrolling down
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) { // Close menu after scrolling 50px
-            closeMenu();
-        }
-    });
     
     // Preload images for better performance
     const preloadImages = () => {

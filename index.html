@@ -27,31 +27,23 @@
 
     <main>
         <!-- Menu Overlay -->
-    <div class="menu-overlay">
+    <div class="menu-overlay" x-data="{ planets: [
+        { name: 'Live painting', img: 'images/planets/planet-01.svg', class: 'planet-1' },
+        { name: 'Workshops : learn bodypainting', img: 'images/planets/planet-02.svg', class: 'planet-2' },
+        { name: 'private Cocoon', img: 'images/planets/planet-03.svg', class: 'planet-3' },
+        { name: 'My art', img: 'images/planets/planet-04.svg', class: 'planet-4' },
+        { name: 'All of my art', img: 'images/planets/planet-05.svg', class: 'planet-5' },
+    ] }">
         <div class="menu-close" id="menu-close">✕</div>
         <div class="menu-content">
             <img src="images/logo_cocosmos.svg" alt="Cocosmos Logo" class="menu-logo">
             <div class="planets-container">
-                <div class="planet planet-1" data-name="Live painting">
-                    <img src="images/planets/planet-01.svg" alt="Live painting">
-                    <span class="planet-name">Live painting</span>
-                </div>
-                <div class="planet planet-2" data-name="Workshops : learn bodypainting">
-                    <img src="images/planets/planet-02.svg" alt="Workshops">
-                    <span class="planet-name">Workshops : learn bodypainting</span>
-                </div>
-                <div class="planet planet-3" data-name="private Cocoon">
-                    <img src="images/planets/planet-03.svg" alt="private Cocoon">
-                    <span class="planet-name">private Cocoon</span>
-                </div>
-                <div class="planet planet-4" data-name="My art">
-                    <img src="images/planets/planet-04.svg" alt="My art">
-                    <span class="planet-name">My art</span>
-                </div>
-                <div class="planet planet-5" data-name="All of my art">
-                    <img src="images/planets/planet-05.svg" alt="All of my art">
-                    <span class="planet-name">All of my art</span>
-                </div>
+                <template x-for="planet in planets" :key="planet.name">
+                    <div class="planet" :class="planet.class" :data-name="planet.name">
+                        <img :src="planet.img" :alt="planet.name">
+                        <span class="planet-name" x-text="planet.name"></span>
+                    </div>
+                </template>
             </div>
         </div>
     </div>
@@ -122,16 +114,16 @@
                 <div class="artists-subheading">EXPLORE MY CREATIVE UNIVERSE</div>
             </div>
             
-            <div class="artists-gallery">
-                <div class="artist-card">
-                    <img src="images/art/Bodypaint%20Brigitte-07.jpg" alt="Artist 1">
-                </div>
-                <div class="artist-card">
-                    <img src="images/art/DSC00329.jpg" alt="Artist 2">
-                </div>
-                <div class="artist-card">
-                    <img src="images/art/DSC08399.jpg" alt="Artist 3">
-                </div>
+            <div class="artists-gallery" x-data="{ artists: [
+                { img: 'images/art/Bodypaint%20Brigitte-07.jpg', alt: 'Artist 1' },
+                { img: 'images/art/DSC00329.jpg', alt: 'Artist 2' },
+                { img: 'images/art/DSC08399.jpg', alt: 'Artist 3' }
+            ] }">
+                <template x-for="artist in artists" :key="artist.img">
+                    <div class="artist-card">
+                        <img :src="artist.img" :alt="artist.alt">
+                    </div>
+                </template>
             </div>
             
             <div class="slider-controls artists-controls">
@@ -209,31 +201,20 @@
             </div>
             
             <div class="footer-content">
-                <div class="footer-column footer-left">
-                    <a href="#about-section" class="footer-item">
-                        <div class="footer-image-container">
-                            <img src="images/DSC09388.JPG" alt="About" class="footer-image">
-                            <div class="footer-link">ABOUT</div>
-                        </div>
-                    </a>
-                    <a href="#my-work-section" class="footer-item">
-                        <div class="footer-image-container">
-                            <img src="images/DSC09388.JPG" alt="My Work" class="footer-image">
-                            <div class="footer-link">MY WORK</div>
-                        </div>
-                    </a>
-                    <a href="#schedule-section" class="footer-item">
-                        <div class="footer-image-container">
-                            <img src="images/DSC09388.JPG" alt="To Find Me" class="footer-image">
-                            <div class="footer-link">TO FIND ME</div>
-                        </div>
-                    </a>
-                    <a href="#contact-section" class="footer-item">
-                        <div class="footer-image-container">
-                            <img src="images/DSC09388.JPG" alt="Contact" class="footer-image">
-                            <div class="footer-link">CONTACT</div>
-                        </div>
-                    </a>
+                <div class="footer-column footer-left" x-data="{ links: [
+                    { href: '#about-section', img: 'images/DSC09388.JPG', alt: 'About', label: 'ABOUT' },
+                    { href: '#my-work-section', img: 'images/DSC09388.JPG', alt: 'My Work', label: 'MY WORK' },
+                    { href: '#schedule-section', img: 'images/DSC09388.JPG', alt: 'To Find Me', label: 'TO FIND ME' },
+                    { href: '#contact-section', img: 'images/DSC09388.JPG', alt: 'Contact', label: 'CONTACT' },
+                ] }">
+                    <template x-for="link in links" :key="link.href">
+                        <a :href="link.href" class="footer-item">
+                            <div class="footer-image-container">
+                                <img :src="link.img" :alt="link.alt" class="footer-image">
+                                <div class="footer-link" x-text="link.label"></div>
+                            </div>
+                        </a>
+                    </template>
                 </div>
                 
                 <div class="footer-column footer-contact">
