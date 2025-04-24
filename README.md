@@ -1,53 +1,62 @@
-# Cocosmos Website
+# Cocosmos Portfolio Website
 
-A modern, immersive website for a creative artist portfolio, built with HTML, CSS, and Alpine.js. This project features smooth animations, interactive elements, a cosmic-themed navigation menu, and a cohesive dark theme design.
+A modern, immersive portfolio for a creative artist, featuring cosmic themes, smooth animations, and responsive design.
 
 ## Getting Started
 
-### Running the Project Locally
+1. Clone or download this repository
+2. Open a terminal in the project directory
+3. Start a local server (choose one of the following methods):
+   - **Python 3:** `python3 -m http.server 8000`
+   - **Node.js:** `npx http-server` OR `npx live-server` OR `npx serve`
+   - **PHP:** `php -S localhost:8000`
+   - **VSCode Live Server Extension:** Right-click `index.html` and select "Open with Live Server"
+4. Visit `http://localhost:8000` (or the port shown in your terminal) in your browser if using a local server.
 
-1. Clone the repository or download the project files
-2. Navigate to the project directory
-3. Start a local server:
+5. Alternatively, but not recommended, you can *open `index.html` directly in your browser* (double-click or open with your browser).
+Note: You'll have issues, it will not work as intented ! Some JavaScript features (such as fetch requests or module imports) may not work due to browser security restrictions when using the `file://` protocol.
 
-```bash
-# Using Python 3 (recommended)
-python3 -m http.server 8000
+## Tech Stack
 
-# Using Python 2
-python -m SimpleHTTPServer 8000
+- HTML5
+- CSS3 (custom properties, transitions, Stylelint)
+- Alpine.js (for reactivity)
+- Vanilla JavaScript
 
-# Using Node.js with http-server
-npx http-server
-```
+## Features
 
-1. Open your browser and visit: `http://localhost:8000`
+- **Dark theme** with CSS variables for easy theming
+- **Responsive layout** for all devices
+- **Hero section** with animated video background
+- **Cosmic navigation menu** with interactive planets
+- **Gallery** with grayscale-to-color image transitions
+- **Schedule, News, and Contact sections**
+- **Interactive UI** powered by Alpine.js and custom JS
+- **CSS refactored** for maintainability (variables, selector order, linting)
 
 ## Project Sections
 
-### 1. Hero Section
+- **Hero:** Full-screen video background with parallax and animated heading.
+- **Cocosmos Description:** Brief overview of the Cocosmos concept and theme.
+- **My Work Gallery:** Displays featured artwork with animated grayscale-to-color transitions.
+- **Schedule:** Timeline of events with dates and descriptions.
+- **News:** Highlights recent updates and stories with images.
+- **Contact:** Simple form for inquiries and messages.
+- **Footer:** Quick links and showcase imagery, styled to match the cosmic theme.
 
-- Features a full-screen video background with a grayscale-to-color animation
-- Large, impactful heading "THREE DAYS OF INK MASTERY"
-- Smooth parallax scrolling effect
-- Navigation arrows for content exploration
+## Development & Quality
 
-### 2. Cocosmos Description
+- **CSS Variables:** All colors, spacing, fonts, and transitions use custom properties defined in `:root` for easy updates.
+- **Linting:** Stylelint with standard config enforces clean, consistent CSS (`npx stylelint styles.css`).
+- **Modular Structure:** Each section (hero, gallery, schedule, news, contact, footer) is organized for clarity and maintainability.
 
-- Informative section with text content about the Cocosmos concept
-- Clean layout with right and left-aligned paragraphs
-- Maintains the dark theme aesthetic
+## Contributing
 
-### 3. My Work Gallery
+Pull requests are welcome. Please keep code clean and follow the CSS variable system.
 
-- Showcases creative work with three featured images
-- Images transition from grayscale to color on page load
-- Clean, grid-based layout
-- Responsive design that adapts to different screen sizes
+## License
 
-### 4. Schedule Section
-
-- Right-aligned "SCHEDULE" heading with date navigation
+MIT
 - Decorative elements with white bars and dots
 - Timeline of events with times and descriptions
 - Structured layout for easy reading
